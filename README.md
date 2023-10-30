@@ -13,8 +13,8 @@ pip install -r requirements.txt
 (loading BLIP2 into memory takes several seconds)
 
 Two example clients are provided: 
-* client_example-dummydata.py (finds captions on a random noise data)
-* client_example-putinmask.py (finds a putin mask in an example video `sample_videos/putin_test.mp4` based on the provided captions)
+* `client_example-dummydata.py` (finds captions on a random noise data)
+* `client_example-putinmask.py` (finds a putin mask in an example video `sample_videos/putin_test.mp4` based on the provided captions)
 
 #### multi-gpu server
 
@@ -28,14 +28,18 @@ pip install -r requirements-torchserve.txt
 (takes some time to load BLIP2 into GPU memory)
 
 After the server is up and running, several example clients are provided:
-* client_example-dummydata.py
-* client_example-batch.py
-* client_example-stream.py
-* client_example-putinmask.py
+* `client_example-dummydata.py` (finds captions on a random noise data)
+* `client_example-batch.py` (find captions with batches *can be slower*)
+* `client_example-stream.py` (find captions using asyncio stream *faster but can clog the computer*)
+* `client_example-putinmask.py` (finds a putin mask in an example video `sample_videos/putin_test.mp4` based on the provided captions)
+
+##### config.properties
+
+To **change the number of gpus** we must set the `number_of_gpu` parameter and change the `minWorkers`, `maxWorkers` parameters accordingly in the model specification. To use only some of gpus available, we set the `CUDA_VISIBLE_DEVICES` variable to a list in the `start.sh` script.
 
 ### Technology used
 
-* huggingface transformers - BLIP2 model
-* flask - used by the single-gpu server
-* torchserve - used by the multi-gpu server
-* aiohttp, asyncio - concurrent runtime in bulk
+* **huggingface transformers** - BLIP2 model
+* **flask** - used by the single-gpu server
+* **torchserve** - used by the multi-gpu server
+* **aiohttp, asyncio** - concurrent runtime in bulk
