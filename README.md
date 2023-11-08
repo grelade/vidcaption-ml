@@ -1,6 +1,8 @@
 ### ML Video captioning tool
 
-A tool for creating video captions in bulk. Forms the basic element in the preprocessing pipeline used in the <a>putin-dataset</a> to extract clips with the president Putin. Uses the BLIP2 img2txt model as the captioning module.
+A tool for creating video captions in bulk. Uses the [BLIP2 + OPT](https://huggingface.co/Salesforce/blip2-opt-2.7b) img2txt model as the captioning module.
+
+Forms the basic element in the preprocessing pipeline used in the <a>putin-dataset</a> to extract clips with the president Putin. 
 
 #### single-gpu server
 
