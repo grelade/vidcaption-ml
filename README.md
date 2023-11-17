@@ -37,7 +37,7 @@ After the server is up and running, several example clients are provided:
 
 ##### config.properties
 
-To **change the number of gpus** we must set the `number_of_gpu` parameter and change the `minWorkers`, `maxWorkers` parameters accordingly in the model specification. To use only some of gpus available, we set the `CUDA_VISIBLE_DEVICES` variable to a list in the `start.sh` script.
+To **change the number of gpus** we must set the `number_of_gpu` parameter and change the `minWorkers`, `maxWorkers` parameters accordingly in the model specification. To use only a subset of gpus available, set the `CUDA_VISIBLE_DEVICES` variable to a list in the `start.sh` script.
 
 ### Technology used
 
