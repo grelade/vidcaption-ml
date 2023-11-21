@@ -33,6 +33,7 @@ After the server is up and running, several example clients are provided:
 * `client_example-dummydata.py` (finds captions on a random noise data)
 * `client_example-batch.py` (find captions with batches *can be slower*)
 * `client_example-stream.py` (find captions using asyncio stream *faster but can clog the computer*)
+* * `client_example-stream-v2.py` (find captions using batched asyncio streaming *fastest*)
 * `client_example-putinmask.py` (finds a putin mask in an example video `sample_videos/putin_test.mp4` based on the provided captions)
 
 ##### config.properties
