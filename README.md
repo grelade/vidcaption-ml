@@ -32,8 +32,8 @@ pip install -r requirements-torchserve.txt
 After the server is up and running, several example clients are provided:
 * `cli-dummydata.py` (finds captions on a random noise data)
 * `cli-single.py` (find captions, uses sync video loading and async single-frame requests)
-* `cli-stream-single.py` (find captions, uses async stream-like video loading and async single-frame requests)
-* `cli-stream-prebatch.py` (find captions, uses async stream-like video loading and async prebatched requests)
+* `cli-str-single.py` (find captions, uses async stream-like video loading and async single-frame requests)
+* `cli-str-prebatch.py` (find captions, uses async stream-like video loading and async prebatched requests)
 * `cli-putinmask.py` (finds a putin mask in an example video `sample_videos/putin_test.mp4` based on the provided captions)
 
 ##### client benchmark
