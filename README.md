@@ -2,7 +2,9 @@
 
 A tool for creating video captions in bulk. Uses the [BLIP2 + OPT](https://huggingface.co/Salesforce/blip2-opt-2.7b) img2txt model as the captioning module.
 
-Forms the basic building block in the preprocessing pipeline used in the forthcoming <a>putin-dataset</a> comprising of Vladimir Putin clips. 
+<!-- Forms the basic building block in the preprocessing pipeline used in the forthcoming <a>putin-dataset</a> comprising of Vladimir Putin clips.  -->
+
+Blogpost explaining the pipeline is [here](https://grelade.github.io/captioning-in-bulk).
 
 #### single-gpu server
 
