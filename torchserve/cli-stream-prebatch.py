@@ -4,11 +4,10 @@ import cv2 as cv
 import pickle
 import time
 import numpy as np
-# from client_func import caption_video_stream_v2
 
 CAPTIONS_MODEL_URL = 'http://localhost:12345/predictions/blip2'
-BATCH_SIZE = 64
-N_WORKERS = 4
+PREBATCH_SIZE = 8
+N_WORKERS = 10
 
 async def caption_video(video_path: str) -> bool:
     
@@ -17,7 +16,7 @@ async def caption_video(video_path: str) -> bool:
     
     async def video_reader():
         '''
-        reads frames from video_path and puts them on vframe_queue in batches of size BATCH_SIZE
+        reads frames from video_path and puts them on vframe_queue in batches of size PREBATCH_SIZE
         '''
         cap = cv.VideoCapture(video_path)
         total_frames = int(cap.get(cv.CAP_PROP_FRAME_COUNT))
@@ -31,7 +30,7 @@ async def caption_video(video_path: str) -> bool:
             else:
                 frame = cv.cvtColor(frame, cv.COLOR_BGR2RGB)
                 frames.append(frame)
-                if len(frames) == BATCH_SIZE:
+                if len(frames) == PREBATCH_SIZE:
                     frames = np.array(frames)
                     await vframe_queue.put((i_batch,frames))
                     i_batch += 1
@@ -78,8 +77,8 @@ async def caption_video(video_path: str) -> bool:
     
     print(info)
     
-    n_workers_eff = min(int(np.ceil(total_frames/BATCH_SIZE)),N_WORKERS)
-    print(f'BATCH_SIZE = {BATCH_SIZE}; N_WORKERS = {N_WORKERS}; n_workers_eff = {n_workers_eff}')
+    n_workers_eff = min(int(np.ceil(total_frames/PREBATCH_SIZE)),N_WORKERS)
+    print(f'PREBATCH_SIZE = {PREBATCH_SIZE}; N_WORKERS = {N_WORKERS}; n_workers_eff = {n_workers_eff}')
     
     tasks = []
     tasks += [inference_worker(n) for n in range(n_workers_eff)]
@@ -92,7 +91,7 @@ async def caption_video(video_path: str) -> bool:
 
 async def main():
     video_path = '../sample_video/test.mp4'
-
+    
     print(f'captions_model_url={CAPTIONS_MODEL_URL}')
     
     start_time = time.time()
@@ -100,6 +99,7 @@ async def main():
     end_time = time.time()
     
     print("--- %s seconds ---" % (end_time - start_time))
+    print("--- %s frames/sec ---" % (len(captions)/(end_time - start_time)))
     print(f'len(captions)={len(captions)}')
     print('excerpt:')
     for c in captions[::5][:10]:
